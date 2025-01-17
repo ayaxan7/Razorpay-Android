@@ -23,10 +23,9 @@ import retrofit2.Response
 
 class PaymentViewModel: ViewModel(), PaymentResultWithDataListener, ExternalWalletListener {
     fun startPayment(context: Context, amountInRupees: Int) {
-        val amountInPaise = amountInRupees  // Convert INR to paise
 
         // Call backend to get order_id
-        RetrofitClient.instance.createOrder(OrderRequest(amountInPaise))
+        RetrofitClient.instance.createOrder(OrderRequest(amountInRupees))
             .enqueue(object : Callback<OrderResponse> {
                 override fun onResponse(call: Call<OrderResponse>, response: Response<OrderResponse>) {
                     if (response.isSuccessful) {
